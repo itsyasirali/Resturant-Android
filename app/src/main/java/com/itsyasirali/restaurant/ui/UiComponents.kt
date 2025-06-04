@@ -134,6 +134,8 @@ fun BorderButton(
 @ExperimentalComposeUiApi
 @Composable
 fun AppTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     hint: String,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -141,13 +143,11 @@ fun AppTextField(
     rounded: Int = 28,
     fontSize: Int = 14,
 ) {
-    var textFieldState by remember {
-        mutableStateOf("")
-    }
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
+
     TextField(
         modifier = modifier
             .fillMaxWidth()
@@ -159,7 +159,8 @@ fun AppTextField(
                     }
                 }
             },
-        value = textFieldState,
+        value = value,
+        onValueChange = onValueChange,
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = gray,
             cursorColor = orange,
@@ -167,9 +168,6 @@ fun AppTextField(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
-        onValueChange = {
-            textFieldState = it
-        },
         placeholder = {
             Text(
                 text = hint,
@@ -181,7 +179,10 @@ fun AppTextField(
             )
         },
         shape = RoundedCornerShape(rounded.dp),
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = action),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+            imeAction = action
+        ),
         keyboardActions = KeyboardActions(
             onNext = { focusManager.moveFocus(FocusDirection.Down) },
             onDone = {

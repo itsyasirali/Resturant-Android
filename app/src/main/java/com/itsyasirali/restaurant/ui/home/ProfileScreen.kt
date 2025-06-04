@@ -10,6 +10,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -29,6 +33,13 @@ import com.itsyasirali.restaurant.ui.ui.theme.*
 @Composable
 fun ProfileScreen(){
     val scrollState = rememberScrollState()
+    var fullName by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var address by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
     BahgatResturantTheme {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.verticalScroll(state = scrollState)) {
             AppTopBar(title = "Profile", backIcon = false)
@@ -38,17 +49,22 @@ fun ProfileScreen(){
             Text("Samer Mushtaha", style = TextStyle(fontFamily = metropolisFontFamily, color = primaryFontColor, fontSize = 16.sp, fontWeight = FontWeight.Bold))
             SignOut("SignOut"){}
             Spacer(modifier = Modifier.height(15.dp))
-            AppTextField(hint = "Full name")
+            AppTextField(value = fullName, onValueChange = { fullName = it }, hint = "Full name")
             Spacer(modifier = Modifier.height(15.dp))
-            AppTextField(hint = "Email")
+
+            AppTextField(value = email, onValueChange = { email = it }, hint = "Email")
             Spacer(modifier = Modifier.height(15.dp))
-            AppTextField(hint = "Mobile no")
+
+            AppTextField(value = phone, onValueChange = { phone = it }, hint = "Mobile no")
             Spacer(modifier = Modifier.height(15.dp))
-            AppTextField(hint = "Address")
+
+            AppTextField(value = address, onValueChange = { address = it }, hint = "Address")
             Spacer(modifier = Modifier.height(15.dp))
-            AppTextField(hint = "Password")
+
+            AppTextField(value = password, onValueChange = { password = it }, hint = "Password")
             Spacer(modifier = Modifier.height(15.dp))
-            AppTextField(hint = "Confirm password")
+
+            AppTextField(value = confirmPassword, onValueChange = { confirmPassword = it }, hint = "Confirm password")
             Spacer(modifier = Modifier.height(20.dp))
             FilledButton(text = "Save", modifier = Modifier.padding(horizontal = 30.dp)) {}
             Spacer(modifier = Modifier.height(40.dp))

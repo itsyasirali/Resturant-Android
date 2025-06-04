@@ -286,22 +286,60 @@ enum class BottomSheetType() {
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddCreditBottomSheet(closeSheet: () -> Unit) {
+    var cardNumber by remember { mutableStateOf("") }
+    var mm by remember { mutableStateOf("") }
+    var yy by remember { mutableStateOf("") }
+    var securityCode by remember { mutableStateOf("") }
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
+
     Column() {
         Text(text = "Add Credit/Debit Card", modifier = Modifier.padding(20.dp), style = TextStyle(color = primaryFontColor, fontWeight = FontWeight.Bold, fontFamily = metropolisFontFamily, fontSize = 15.sp))
         Divider()
         Spacer(modifier = Modifier.height(18.dp))
-        AppTextField(hint = "Card Number")
+        AppTextField(
+            value = cardNumber,
+            onValueChange = { cardNumber = it },
+            hint = "Card Number"
+        )
         Spacer(modifier = Modifier.height(18.dp))
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
-            AppTextField(hint = "MM", modifier = Modifier.fillMaxWidth(0.5f))
-            AppTextField(hint = "YY", modifier = Modifier.fillMaxWidth(1f))
+            AppTextField(
+                value = mm,
+                onValueChange = { mm = it },
+                hint = "MM",
+                modifier = Modifier.weight(1f)
+            )
+            AppTextField(
+                value = yy,
+                onValueChange = { yy = it },
+                hint = "YY",
+                modifier = Modifier.weight(1f)
+            )
         }
         Spacer(modifier = Modifier.height(18.dp))
-        AppTextField(hint = "Security Code")
+        AppTextField(
+            value = securityCode,
+            onValueChange = { securityCode = it },
+            hint = "Security Code"
+        )
+
         Spacer(modifier = Modifier.height(18.dp))
-        AppTextField(hint = "First Name")
+
+        AppTextField(
+            value = firstName,
+            onValueChange = { firstName = it },
+            hint = "First Name"
+        )
+
         Spacer(modifier = Modifier.height(18.dp))
-        AppTextField(hint = "Last Name")
+
+        AppTextField(
+            value = lastName,
+            onValueChange = { lastName = it },
+            hint = "Last Name"
+        )
+
         Spacer(modifier = Modifier.height(18.dp))
         ButtonWithImage(
             text = "Add tis Cart",

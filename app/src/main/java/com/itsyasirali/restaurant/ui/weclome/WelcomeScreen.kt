@@ -64,16 +64,23 @@ fun WelcomeScreen(navigateToSignIn:()-> Unit , navigateToSignUp:()-> Unit) {
 
 @Composable
 private fun TopSection() {
-    Box {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(400.dp)
+    ) {
         Image(
             painter = painterResource(id = R.drawable.ic_sign_in_top),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 88.dp),
+                .height(400.dp),
             contentScale = ContentScale.FillWidth,
         )
-        Logo(modifier = Modifier.align(Alignment.BottomCenter))
+        Logo(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .size(82.dp)
+        )
     }
-
 }

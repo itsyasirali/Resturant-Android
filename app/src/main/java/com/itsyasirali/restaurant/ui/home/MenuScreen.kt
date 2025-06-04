@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,24 +33,29 @@ fun MenuScreen() {
     val list = arrayOf(
         Menu(image = com.itsyasirali.restaurant.R.drawable.item_a, name = "Food", numOfItem = 120),
         Menu(image = com.itsyasirali.restaurant.R.drawable.item_b, name = "Beverages", numOfItem = 250),
-        Menu(image = com.itsyasirali.restaurant.R.drawable.item_b, name = "Testtt", numOfItem = 920),
+        Menu(image = com.itsyasirali.restaurant.R.drawable.item_b, name = "Drinks", numOfItem = 920),
         Menu(image = com.itsyasirali.restaurant.R.drawable.item_c, name = "Desserts", numOfItem = 520),
     )
 
-    BahgatResturantTheme() {
-        Column() {
-            AppTopBar(backIcon = false, title = "Menu")
-            Spacer(modifier = Modifier.height(20.dp))
-            SearchField()
-            Spacer(modifier = Modifier.height(20.dp))
-            LazyColumn {
-                itemsIndexed(list) { index, item ->
-                    MenuItem(index, list)
+    BahgatResturantTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colors.background
+        ) {
+            Column {
+                AppTopBar(backIcon = false, title = "Menu")
+                Spacer(modifier = Modifier.height(20.dp))
+                SearchField()
+                Spacer(modifier = Modifier.height(20.dp))
+                LazyColumn {
+                    itemsIndexed(list) { index, item ->
+                        MenuItem(index, list)
+                    }
                 }
             }
         }
-
     }
+
 }
 
 @Composable

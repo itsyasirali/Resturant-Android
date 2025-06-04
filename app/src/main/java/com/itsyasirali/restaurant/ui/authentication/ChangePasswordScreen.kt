@@ -4,6 +4,7 @@ package com.itsyasirali.restaurant.ui.authentication
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -16,10 +17,16 @@ import androidx.compose.ui.unit.sp
 import com.itsyasirali.restaurant.ui.AppTextField
 import com.itsyasirali.restaurant.ui.FilledButton
 import com.itsyasirali.restaurant.ui.ui.theme.*
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ChangePasswordScreen() {
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
     BahgatResturantTheme {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -47,9 +54,16 @@ fun ChangePasswordScreen() {
                 )
             )
             Spacer(modifier = Modifier.height(36.dp))
-            AppTextField(hint = "New Password", keyboardType = KeyboardType.Password)
+            AppTextField(
+                value = password,
+                onValueChange = { password = it },
+                hint = "New Password",
+                keyboardType = KeyboardType.Password
+            )
             Spacer(modifier = Modifier.height(28.dp))
             AppTextField(
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it },
                 hint = "Confirm Password",
                 keyboardType = KeyboardType.Password,
                 action = ImeAction.Done

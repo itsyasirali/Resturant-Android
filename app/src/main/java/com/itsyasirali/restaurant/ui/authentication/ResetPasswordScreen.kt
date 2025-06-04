@@ -3,6 +3,10 @@ package com.itsyasirali.restaurant.ui.authentication
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -20,6 +24,8 @@ import com.itsyasirali.restaurant.ui.ui.theme.*
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ResetPasswordScreen(navigateToEmailVerificationScreen:()->Unit) {
+    var email by remember { mutableStateOf("") }
+
     BahgatResturantTheme {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -47,6 +53,8 @@ fun ResetPasswordScreen(navigateToEmailVerificationScreen:()->Unit) {
             )
             Spacer(modifier = Modifier.height(60.dp))
             AppTextField(
+                value = email,
+                onValueChange = { email = it },
                 hint = "Your Email",
                 action = ImeAction.Done,
                 keyboardType = KeyboardType.Email

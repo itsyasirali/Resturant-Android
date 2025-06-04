@@ -6,6 +6,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -28,6 +32,9 @@ fun SignInScreen(
     navigateToSignUpScreen: () -> Unit,
     navigateToHomeScreen: () -> Unit
 ) {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
     BahgatResturantTheme {
         Column(
             modifier = Modifier
@@ -56,9 +63,16 @@ fun SignInScreen(
                 )
             )
             Spacer(modifier = Modifier.height(36.dp))
-            AppTextField(hint = "Your Email", keyboardType = KeyboardType.Email)
+            AppTextField(
+                value = email,
+                onValueChange = { email = it },
+                hint = "Your Email",
+                keyboardType = KeyboardType.Email
+            )
             Spacer(modifier = Modifier.height(28.dp))
             AppTextField(
+                value = password,
+                onValueChange = { password = it },
                 hint = "Password",
                 keyboardType = KeyboardType.Password,
                 action = ImeAction.Done
